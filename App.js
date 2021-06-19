@@ -46,7 +46,7 @@ const App = () => {
             },
           })}
           tabBarOptions={{
-            activeTintColor: 'tomato',
+            activeTintColor: 'blue',
             inactiveTintColor: 'gray',
           }}>
           <Tab.Screen name="Home" component={HomePage} />
