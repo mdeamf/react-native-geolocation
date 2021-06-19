@@ -9,12 +9,36 @@
 import React from 'react';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
-import {Text} from 'react-native';
+import {Text, PermissionsAndroid} from 'react-native';
 import {SafeAreaProvider, SafeAreaView} from 'react-native-safe-area-context';
 import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
 import HomePage from './src/pages/home/HomePage';
+
+const requestLocationPermission = async () => {
+  console.log('requesting permission');
+  try {
+    const granted = await PermissionsAndroid.request(
+      PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+      {
+        title: 'React Native Location',
+        message:
+          'Please let this app access your location for academic purposes.',
+        buttonNeutral: 'Ask Me Later',
+        buttonNegative: 'Cancel',
+        buttonPositive: 'OK',
+      },
+    );
+    if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+      console.log('You can use the location');
+    } else {
+      console.log('Location permission denied');
+    }
+  } catch (err) {
+    console.warn(err);
+  }
+};
 
 const SettingsScreen = () => {
   return (
@@ -28,6 +52,7 @@ const SettingsScreen = () => {
 const Tab = createBottomTabNavigator();
 
 const App = () => {
+  requestLocationPermission();
   return (
     <SafeAreaProvider>
       <NavigationContainer>
