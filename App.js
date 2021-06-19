@@ -14,14 +14,7 @@ import {SafeAreaProvider, SafeAreaView} from 'react-native-safe-area-context';
 import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
-const HomeScreen = () => {
-  return (
-    <SafeAreaView
-      style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-      <Text>Home!</Text>
-    </SafeAreaView>
-  );
-};
+import HomePage from './src/pages/home/HomePage';
 
 const SettingsScreen = () => {
   return (
@@ -49,7 +42,6 @@ const App = () => {
                 iconName = focused ? 'settings' : 'settings-outline';
               }
 
-              // You can return any component that you like here!
               return <Ionicons name={iconName} size={size} color={color} />;
             },
           })}
@@ -57,7 +49,7 @@ const App = () => {
             activeTintColor: 'tomato',
             inactiveTintColor: 'gray',
           }}>
-          <Tab.Screen name="Home" component={HomeScreen} />
+          <Tab.Screen name="Home" component={HomePage} />
           <Tab.Screen name="Settings" component={SettingsScreen} />
         </Tab.Navigator>
       </NavigationContainer>
